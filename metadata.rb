@@ -1,0 +1,7 @@
+name             'rbenv'
+maintainer       'YOUR_NAME'
+maintainer_email 'YOUR_EMAIL'
+license          'All rights reserved'
+description      'Installs/Configures rbenv'
+long_description 'Installs/Configures rbenv'
+version          '0.1.0'
