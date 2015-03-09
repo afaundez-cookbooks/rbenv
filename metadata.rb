@@ -1,7 +1,11 @@
 name             'rbenv'
-maintainer       'YOUR_NAME'
-maintainer_email 'YOUR_EMAIL'
+maintainer       'Álvaro Faúndez'
+maintainer_email 'alvaro@faundez.net'
 license          'All rights reserved'
 description      'Installs/Configures rbenv'
 long_description 'Installs/Configures rbenv'
 version          '0.1.0'
+
+depends 'apt'
+depends 'build-essential'
+depends 'git'
