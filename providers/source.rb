@@ -1,12 +1,14 @@
 action :install do
-
-  user_root = (new_resource.user == 'root') ? '/root' : "/home/#{new_resource.user}"
+  user_root = (new_resource.name == 'root') ? '/root' : "/home/#{new_resource.name}"
   rbenv_root = "#{user_root}/.rbenv"
 
-  execute "git clone git://github.com/sstephenson/rbenv.git #{rbenv_root}" do
-    not_if "ls #{rbenv_root}"
-    user new_resource.user
-    group new_resource.user
+  git rbenv_root do
+    repository 'git://github.com/sstephenson/rbenv.git'
+    revision 'master'
+    depth 1
+    user new_resource.name
+    group new_resource.name
+    action :checkout
   end
 
   plugins =[
@@ -20,32 +22,41 @@ action :install do
     ['rkh', 'rbenv-whatis'],
     ['rkh', 'rbenv-use'],
   ]
+  plugins_root = ::File.join rbenv_root, 'plugins'
+
+  directory plugins_root do
+    user new_resource.name
+    group new_resource.name
+  end
 
   plugins.each do |user, repo|
-    rbenv_plugin_root = "#{rbenv_root}/plugins/#{repo}"
-    execute "git clone git://github.com/#{user}/#{repo}.git #{rbenv_plugin_root}" do
-      not_if "ls #{rbenv_plugin_root}"
-      user new_resource.user
-    group new_resource.user
+    rbenv_plugin_root = ::File.join plugins_root, repo
+    git rbenv_plugin_root do
+      repository "git://github.com/#{user}/#{repo}.git"
+      revision 'master'
+      depth 1
+      user new_resource.name
+      group new_resource.name
+      action :checkout
     end
   end
 
-  bash "Add rbenv to the top of bashrc for user #{new_resource.user}" do
+  bash "add rbenv to the top of bashrc for user #{new_resource.name}" do
     rbenv_line = 'export RBENV_ROOT="${HOME}/.rbenv"; if [ -d "${RBENV_ROOT}" ]; then   export PATH="${RBENV_ROOT}/bin:${PATH}";   eval "$(rbenv init -)"; fi; # RBENV SOURCE COOKBOOK'
-    not_if "grep 'RBENV SOURCE COOKBOOK' #{user_root}/.bashrc"
     cwd user_root
     code <<-BASHCODE
     cp .bashrc .bashrc.rbenv.old
     echo '#{rbenv_line}' > .bashrc
     cat .bashrc.rbenv.old >> .bashrc
     BASHCODE
-    user new_resource.user
-    group new_resource.user
+    user new_resource.name
+    group new_resource.name
+    not_if "grep 'RBENV SOURCE COOKBOOK' #{user_root}/.bashrc"
   end
 
   bash "rbenv check" do
-    user new_resource.user
-    group new_resource.user
+    user new_resource.name
+    group new_resource.name
     flags '-l'
     code "rbenv version"
     environment  ({'HOME' => user_root})
