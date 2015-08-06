@@ -1,4 +1,4 @@
-actions :install, :update
+actions :install, :upgrade
 default_action :install
 
 attribute :user, :kind_of => String, :required => true
