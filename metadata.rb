@@ -4,7 +4,7 @@ maintainer_email 'alvaro@faundez.net'
 license          'All rights reserved'
 description      'Installs/Configures rbenv'
 long_description 'Installs/Configures rbenv'
-version          '1.1.2'
+version          '1.1.3'
 
 depends 'apt'
 depends 'build-essential'
