@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.2 - 2015-08-06
+### Fixed
+- miss bump version
+
 ## 1.1.1 - 2015-08-06
 ### Fixed
 - centos compatibility path for ruby build and <=2.0.0p247 versions
