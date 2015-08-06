@@ -1,16 +1,23 @@
 include_recipe 'rbenv'
 
-rbenv_source 'install rbenv for user vagrant' do
+rbenv_source 'vagrant'
+
+rbenv_install '2.2.1' do
   user 'vagrant'
 end
 
-rbenv_install 'rbenv install ruby 2.2.1 for user vagrant' do
+rbenv_gem 'bundler' do
   user 'vagrant'
   ruby_version '2.2.1'
 end
 
-rbenv_gem 'install bundler to ruby 2.2.1 installed with rbenv for user vagrant' do
+rbenv_install '1.8.7-p370' do
   user 'vagrant'
-  ruby_version '2.2.1'
-  gem_name 'bundler'
+end
+
+rbenv_gem 'bundler' do
+  user 'vagrant'
+  ruby_version '1.8.7-p370'
+  rubygems_version '1.6.2'
+  action :upgrade
 end
