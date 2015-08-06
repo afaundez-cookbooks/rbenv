@@ -4,7 +4,7 @@ This cookbook gives you and easy and clean rbenv install for a single user.
 
 ## Supported Platforms
 
-Tested on ubuntu Trusty platforms.
+Tested on ubuntu trusty and centos 6.1.
 
 ## Attributes
 

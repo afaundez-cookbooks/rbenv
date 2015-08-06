@@ -3,7 +3,7 @@ action :install do
   user_root = (new_resource.user == 'root') ? '/root' : "/home/#{new_resource.user}"
 
   patch = case node[:platform]
-  when 'ubuntu'
+  when 'centos'
     if Gem::Version.new(new_resource.name) <= Gem::Version.new('2.0.0-p247')
       'curl -fsSL "https://github.com/ruby/ruby/commit/0d58bb55985e787364b0235e5e69278d0f0ad4b0.patch" | filterdiff -x a/ChangeLog | '
     end
