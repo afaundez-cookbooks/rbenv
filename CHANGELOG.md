@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.3 - 2015-08-06
+### Fixed
+- debug line messing up last centos patch
+
 ## 1.1.2 - 2015-08-06
 ### Fixed
 - miss bump version
