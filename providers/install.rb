@@ -9,8 +9,6 @@ action :install do
     end
   end
 
-  log "#{patch unless patch.nil?} rbenv install #{'--patch' unless patch.nil?} #{new_resource.name} && rbenv rehash"
-
   bash "rbenv install #{new_resource.name}" do
     user new_resource.user
     group new_resource.user

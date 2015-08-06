@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased - 2015-08-06
+### removed
+- remove unnecessary log line
+
 ## 1.1.3 - 2015-08-06
 ### Fixed
 - debug line messing up last centos patch
