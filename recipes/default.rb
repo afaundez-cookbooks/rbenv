@@ -1,23 +1,36 @@
-include_recipe 'apt'
+case node[:platform]
+when 'ubuntu'
+  include_recipe 'apt'
+end
+
 include_recipe 'build-essential'
 include_recipe 'git'
 
-package 'zlib1g'
-package 'zlib1g-dev'
-
-package 'openssl'
-package 'libssl-dev'
-
-package 'libc6-dev'
-package 'automake'
-package 'libtool'
-package 'libyaml-dev'
-
-package 'libreadline-dev'
-
-package 'libxml2-dev'
-package 'libxslt1-dev'
-
-package 'ncurses-dev'
-
-package 'libffi-dev'
+case node[:platform]
+when 'ubuntu'
+  package 'zlib1g'
+  package 'zlib1g-dev'
+  package 'openssl'
+  package 'libssl-dev'
+  package 'libc6-dev'
+  package 'automake'
+  package 'libtool'
+  package 'libyaml-dev'
+  package 'libreadline-dev'
+  package 'libxml2-dev'
+  package 'libxslt1-dev'
+  package 'ncurses-dev'
+  package 'libffi-dev'
+when 'centos'
+  package 'zlib-devel'
+  package 'openssl-devel'
+  package 'glibc-devel'
+  package 'automake'
+  package 'libtool'
+  package 'libyaml-devel'
+  package 'readline-devel'
+  package 'libxml2-devel'
+  package 'libxslt-devel'
+  package 'ncurses-devel'
+  package 'libffi-devel'
+end
