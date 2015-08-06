@@ -1,12 +1,12 @@
 action :install do
 
-  user_root = (new_resource.user == 'root') ? '/root' : "/home/#{new_resource.user}"
+  user_root = (new_resource.name == 'root') ? '/root' : "/home/#{new_resource.name}"
   rbenv_root = "#{user_root}/.rbenv"
 
   execute "git clone git://github.com/sstephenson/rbenv.git #{rbenv_root}" do
     not_if "ls #{rbenv_root}"
-    user new_resource.user
-    group new_resource.user
+    user new_resource.name
+    group new_resource.name
   end
 
   plugins =[
@@ -25,12 +25,12 @@ action :install do
     rbenv_plugin_root = "#{rbenv_root}/plugins/#{repo}"
     execute "git clone git://github.com/#{user}/#{repo}.git #{rbenv_plugin_root}" do
       not_if "ls #{rbenv_plugin_root}"
-      user new_resource.user
-    group new_resource.user
+      user new_resource.name
+    group new_resource.name
     end
   end
 
-  bash "Add rbenv to the top of bashrc for user #{new_resource.user}" do
+  bash "Add rbenv to the top of bashrc for user #{new_resource.name}" do
     rbenv_line = 'export RBENV_ROOT="${HOME}/.rbenv"; if [ -d "${RBENV_ROOT}" ]; then   export PATH="${RBENV_ROOT}/bin:${PATH}";   eval "$(rbenv init -)"; fi; # RBENV SOURCE COOKBOOK'
     not_if "grep 'RBENV SOURCE COOKBOOK' #{user_root}/.bashrc"
     cwd user_root
@@ -39,13 +39,13 @@ action :install do
     echo '#{rbenv_line}' > .bashrc
     cat .bashrc.rbenv.old >> .bashrc
     BASHCODE
-    user new_resource.user
-    group new_resource.user
+    user new_resource.name
+    group new_resource.name
   end
 
   bash "rbenv check" do
-    user new_resource.user
-    group new_resource.user
+    user new_resource.name
+    group new_resource.name
     flags '-l'
     code "rbenv version"
     environment  ({'HOME' => user_root})

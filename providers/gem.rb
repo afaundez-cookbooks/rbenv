@@ -5,13 +5,13 @@ action :install do
   source_url = (new_resource.source.nil? or new_resource.source.empty?) ? '' : "--source #{new_resource.source}"
   exid = Time.now.to_i
 
-  bash "install #{new_resource.gem_name} gem for ruby #{new_resource.ruby_version} with rbenv for user #{new_resource.user}" do
+  bash "install #{new_resource.name} gem for ruby #{new_resource.ruby_version} with rbenv for user #{new_resource.user}" do
     user new_resource.user
     group new_resource.user
     flags '-l'
-    code "mkdir /tmp/#{exid} && cd /tmp/#{exid} && rbenv local #{new_resource.ruby_version} && cd /tmp/#{exid} && rbenv exec gem install #{gem_version} #{new_resource.gem_name} #{source_url} && rbenv rehash && rm -f /tmp/#{exid}/.rbenv-version"
+    code "mkdir /tmp/#{exid} && cd /tmp/#{exid} && rbenv local #{new_resource.ruby_version} && cd /tmp/#{exid} && rbenv exec gem install #{gem_version} #{new_resource.name} #{source_url} && rbenv rehash && rm -f /tmp/#{exid}/.rbenv-version"
     environment  ({'HOME' => user_root})
-    not_if "ls -R #{user_root}/.rbenv | grep '/gems/#{new_resource.gem_name}-#{new_resource.gem_version}'"
+    not_if "ls -R #{user_root}/.rbenv | grep '/gems/#{new_resource.name}-#{new_resource.gem_version}'"
   end
 
 end

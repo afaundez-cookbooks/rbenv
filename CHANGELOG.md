@@ -1,5 +1,9 @@
 # Change Log
 
+## unreleased - unreleased
+### Changed
+- Using resource name as relevant parameter
+
 ## [0.1.0] - 2015-03-09
 ### Added
 Initial release of rbenv. Now you can
