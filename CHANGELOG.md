@@ -1,10 +1,10 @@
 # Change Log
 
-## 1.0.0 - 2015-08-05
-### Changed
-Bumping version to first major release. Enjoy!
+## 1.1.0 - 2015-08-06
+### Added
+- Centos compatibility
 
-## unreleased - 2015-08-05
+## 1.0.0 - 2015-08-05
 ### Changed
 - Using resource name as relevant parameter
 ## Refactor
