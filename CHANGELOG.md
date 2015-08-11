@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.5 - 2015-08-06
+### Fixed
+- 1.8.7 install patch
+
 ## 1.1.4 - 2015-08-06
 ### Added
 - recommended packages

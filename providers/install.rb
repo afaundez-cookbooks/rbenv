@@ -4,8 +4,10 @@ action :install do
 
   patch = case node[:platform]
   when 'centos'
-    if Gem::Version.new(new_resource.name) <= Gem::Version.new('2.0.0-p247')
+    if Gem::Version.new('1.9.1') <= Gem::Version.new(new_resource.name) && Gem::Version.new(new_resource.name) <= Gem::Version.new('2.0.0-p247')
       'curl -fsSL "https://github.com/ruby/ruby/commit/0d58bb55985e787364b0235e5e69278d0f0ad4b0.patch" | filterdiff -x a/ChangeLog | '
+    elsif Gem::Version.new(new_resource.name) < Gem::Version.new('1.9.1')
+      'curl -fsSL "https://github.com/ruby/ruby/commit/0d58bb55985e787364b0235e5e69278d0f0ad4b0.patch" | filterdiff -x a/ChangeLog -x a/test/openssl/test_pkey_ec.rb | '
     end
   end
 
