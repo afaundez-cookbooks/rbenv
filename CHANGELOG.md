@@ -1,6 +1,8 @@
 # Change Log
 
-## unreleased - 2015-08-06
+## 1.1.4 - 2015-08-06
+### Added
+- recommended packages
 ### removed
 - remove unnecessary log line
 
