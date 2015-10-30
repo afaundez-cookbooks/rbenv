@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.6 - 2015-10-30
+### Fixed
+- gem install was failing when user had more than one version of ruby, fix not_if check
+
 ## 1.1.5 - 2015-08-06
 ### Fixed
 - 1.8.7 install patch
