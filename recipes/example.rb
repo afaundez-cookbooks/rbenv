@@ -21,3 +21,8 @@ rbenv_gem 'bundler' do
   rubygems_version '1.6.2'
   action :upgrade
 end
+
+rbenv_gem 'bundler' do
+  user 'vagrant'
+  ruby_version '1.8.7-p370'
+end
