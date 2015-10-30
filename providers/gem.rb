@@ -10,7 +10,8 @@ action :install do
     flags '-l'
     code "rbenv shell #{new_resource.ruby_version} && rbenv exec gem install #{gem_version} #{new_resource.name} #{source_url} && rbenv rehash"
     environment  ({'HOME' => user_root})
-    not_if "ls -R #{user_root}/.rbenv | grep '/gems/#{new_resource.name}-#{new_resource.gem_version}'"
+    # TODO: grep by ruby version
+    not_if "ls -R #{user_root}/.rbenv | grep #{new_resource.ruby_version} | grep '/gems/#{new_resource.name}-#{new_resource.gem_version}'"
   end
 
   grep_version = (new_resource.gem_version.empty?) ? '' : "| grep #{new_resource.gem_version}"
